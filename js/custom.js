@@ -1,4 +1,5 @@
 (function($) {
+  // Activate ScrollSpy
   $('body').scrollspy({target: ".spy-active", offset: 100})
 
   // Navigation scrolls
@@ -18,65 +19,33 @@
     
   });
 
+  $(".navbar-collapse a").on('click', function() {
+    $(".navbar-collapse.collapse").removeClass('in');
+  });
+
   // Remove focus when scrolling
   $(window).on('wheel', function(event){
     $('.navbar-nav li a').blur();
   });
 
-  $(".navbar-collapse a").on('click', function() {
-    $(".navbar-collapse.collapse").removeClass('in');
-  });
+  // Highlight current day
+  var today = new Date();
+  console.log(today.getDay());
+  $('.opening-hours li').eq((today.getDay() + 6) % 7).addClass('today');
 
-  // Porfolio filer
-  $("#portfolio-flters li").click(function() {
-    $("#portfolio-flters li").removeClass('filter-active');
+  // Gallery filter
+  $("#gallery-flters li").click(function() {
+    $("#gallery-flters li").removeClass('filter-active');
     $(this).addClass('filter-active');
 
     var selectedFilter = $(this).data("filter");
-    $("#portfolio-wrapper").fadeTo(100, 0);
+    $("#gallery-wrapper").fadeTo(100, 0);
 
-    $(".portfolio-item").fadeOut().css('transform', 'scale(0)');
+    $(".gallery-item").fadeOut().css('transform', 'scale(0)');
 
     setTimeout(function() {
       $(selectedFilter).fadeIn(100).css('transform', 'scale(1)');
-      $("#portfolio-wrapper").fadeTo(300, 1);
+      $("#gallery-wrapper").fadeTo(300, 1);
     }, 300);
   });
-
-  // Team Slider
-  $('.autoplay').slick({
-    dots: true,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 2,
-    slidesToScroll: 3,
-    responsive: [{
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-      // You can unslick at a given breakpoint now by adding:
-      // settings: "unslick"
-      // instead of a settings object
-    ]
-  });
-
 })(jQuery);
