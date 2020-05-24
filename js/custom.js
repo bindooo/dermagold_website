@@ -28,6 +28,8 @@
     $('.navbar-nav li a').blur();
   });
 
+  FB.CustomerChat.hideDialog();
+
   // Highlight current day
   var today = new Date();
   $('.opening-hours li').eq((today.getDay() + 6) % 7).addClass('today');
