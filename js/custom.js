@@ -30,7 +30,6 @@
 
   // Highlight current day
   var today = new Date();
-  console.log(today.getDay());
   $('.opening-hours li').eq((today.getDay() + 6) % 7).addClass('today');
 
   // Gallery filter
